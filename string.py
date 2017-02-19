@@ -1,17 +1,19 @@
 # encoding=utf-8
 
 
-# 字符串匹配--暴力法
-def brute_force_string_match(string, pattern):
-    len_str = len(string)
-    len_pat = len(pattern)
-    if len_str < len_pat:
-        return False
-    elif string == pattern:
-        return 0
-    else:
-        for i in range(0, len_str - len_pat):
-            for j in range(0, len_pat):
-                if string[i+j] != pattern[j]:
-                    break
-            
+class Solution(object):
+    def bruteForceStringMatch(self, string, pattern):
+        for i in range(0, len(string) - len(pattern)):
+            j = 0
+            while j < len(pattern) and pattern[j] == string[j+i]:
+                j += 1
+                if j == len(pattern):
+                    return i
+        return -1
+
+
+if __name__ == '__main__':
+    s = Solution()
+    string = 'NOBODY NOTICED HIM'
+    pattern = 'NOT'
+    print(s.bruteForceStringMatch(string, pattern))
